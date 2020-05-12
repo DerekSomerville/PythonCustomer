@@ -10,3 +10,10 @@ class OutputConsole(Output):
         if self.writeToFile:
             self.outputWriteToFile.writeToFile(output)
         print(output)
+
+def main():
+    outputConsole = OutputConsole()
+    outputConsole.print("Hello World")
+
+if __name__ == "__main__":
+    main()
