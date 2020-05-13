@@ -1,17 +1,11 @@
 from DataSourceInterface import DataSourceInterface
 from DBConnection import DBConnection
+from DBExecuteSQL import DBExecuteSQL
+import sqlite3
 
 class DatabaseGetData(DataSourceInterface):
 
-    dbConnector = DBConnection()
-    connection = None
-
-    def __init__(self):
-        self.connection = self.dbConnector.createConnection()
-
-    def setDBConnector(self,dbConnector):
-        self.dbConnector = dbConnector
-        self.connection = dbConnector.createConnection()
+    dbExecuteSQL = DBExecuteSQL()
 
     def generateSelectStatement(self,tableName,fieldNames):
         return "Select * from " + tableName
@@ -19,9 +13,9 @@ class DatabaseGetData(DataSourceInterface):
     def getData(self,tableName,fieldNames):
         sqlData = []
         selectStatement = self.generateSelectStatement(tableName,fieldNames)
-        selectCursor = self.connection.cursor()
-        selectCursor.execute(selectStatement)
-        for row in selectCursor:
-            sqlData.append(row)
-        selectCursor.close()
+        try:
+            sqlData = self.dbExecuteSQL.executeSqlSelect(selectStatement)
+        except sqlite3.Error as sqlExp:
+            print("getData:An error occurred:", sqlExp.args[0])
+
         return sqlData

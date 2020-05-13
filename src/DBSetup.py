@@ -1,27 +1,20 @@
 import sqlite3
 from DBConnection import DBConnection
+from DBExecuteSQL import DBExecuteSQL
 
 class DBSetup:
 
-    dbConnector = DBConnection()
-    connection = None
-
-    def __init__(self):
-        self.connection = self.dbConnector.createConnection()
-
-    def setDBConnector(self,dbConnector):
-        self.dbConnector = dbConnector
-        self.connection = dbConnector.createConnection()
+    dbExecuteSQL = DBExecuteSQL()
 
     def generateDropTable(self,tableName):
         return "DROP TABLE IF EXISTS " + tableName
 
     def dropTable(self,tableName):
         sqlDropTable = self.generateDropTable(tableName)
-        createDropCursor = self.connection.cursor()
-        createDropCursor.execute(sqlDropTable)
-        self.connection.commit()
-        createDropCursor.close()
+        try:
+            self.dbExecuteSQL.executeSQLCommand(sqlDropTable)
+        except sqlite3.Error as sqlExp:
+            print("dropTable:An error occurred:", sqlExp.args[0])
 
     def generateCreateTableStatement(self,tableName, fieldNames):
         sqlCreateTable =  "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
@@ -44,10 +37,10 @@ class DBSetup:
 
     def createTable(self,tableName, fieldNames):
         sqlCreateTable = self.generateCreateTableStatement(tableName,fieldNames)
-        createTableCursor = self.connection.cursor()
-        createTableCursor.execute(sqlCreateTable)
-        self.connection.commit()
-        createTableCursor.close()
+        try:
+            self.dbExecuteSQL.executeSQLCommand(sqlCreateTable)
+        except sqlite3.Error as sqlExp:
+            print("createTable:An error occurred:", sqlExp.args[0])
 
     def generateInsertStatement(self,tableName, fieldNames):
         counter = 0
@@ -70,10 +63,11 @@ class DBSetup:
         return sqlInsert
 
     def populateEntity(self, sqlCommand, dataRows):
-        populateEntityCursor = self.connection.cursor()
-        populateEntityCursor.executemany(sqlCommand,dataRows)
-        self.connection.commit()
-        populateEntityCursor.close()
+        try:
+            self.dbExecuteSQL.insertData(sqlCommand, dataRows)
+        except sqlite3.Error as sqlExp:
+            print("An error occurred in populateEntity:", sqlExp.args[0])
+
 
 def main():
     dbSetup = DBSetup()

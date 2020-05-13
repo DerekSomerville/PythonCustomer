@@ -2,6 +2,7 @@ from Customer import Customer
 from ReadCSVFile import ReadCSVFile
 from DBSetup import DBSetup
 from DatabaseGetData import DatabaseGetData
+from DBExecuteSQL import DBExecuteSQL
 
 class CustomerDatabaseMapping:
 
@@ -53,12 +54,15 @@ class CustomerDatabaseMapping:
         return allCustomers
 
 def main():
+    dbExecuteSQL = DBExecuteSQL()
+    #dbExecuteSQL.switchToInMemory()
     dbSetup = DBSetup()
     customerDatabaseMapping = CustomerDatabaseMapping(dbSetup)
     customerDatabaseMapping.customerDataBaseSetup()
     print(customerDatabaseMapping.getCustomerData())
     allCustomers = customerDatabaseMapping.createAllCustomers()
     print(len(allCustomers))
+    print(dbExecuteSQL.getListOfTables())
 
 if __name__ == "__main__":
     main()

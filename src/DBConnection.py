@@ -5,12 +5,15 @@ class DBConnection:
     inMemoryDatabase = ":memory:";
     sqlLiteUrl = dbFileName;
 
+    def setInMemory(self):
+        self.sqlLiteUrl = self.inMemoryDatabase
+
     def createConnection(self):
+        connection = None
         try:
-            url = "jdbc:sqlite:" + self.sqlLiteUrl;
-            connection = sqlite3.connect(self.dbFileName)
+            connection = sqlite3.connect(self.sqlLiteUrl)
         except sqlite3.Error as sqlExp:
-            print("An error occurred:", sqlExp.args[0])
+            print("createConnection:An error occurred:", sqlExp.args[0])
         return connection
 
 def main():
