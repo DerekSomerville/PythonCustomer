@@ -1,8 +1,8 @@
-from Customer import Customer
-from ReadCSVFile import ReadCSVFile
-from DBSetup import DBSetup
-from DatabaseGetData import DatabaseGetData
-from DBExecuteSQL import DBExecuteSQL
+from src.Customer import Customer
+from src.ReadCSVFile import ReadCSVFile
+from src.DBSetup import DBSetup
+from src.DatabaseGetData import DatabaseGetData
+from src.DBExecuteSQL import DBExecuteSQL
 
 class CustomerDatabaseMapping:
 
@@ -15,11 +15,8 @@ class CustomerDatabaseMapping:
 
     dataSourceFields = ["emailAddress","firstName","lastName","password"]
 
-    dbSetup = None
+    dbSetup = DBSetup()
     dataSource = DatabaseGetData()
-
-    def __init__(self,dbSetup):
-        self.dbSetup = dbSetup
 
     def createCustomer(self, customerDetails):
         customer = Customer(
@@ -56,8 +53,7 @@ class CustomerDatabaseMapping:
 def main():
     dbExecuteSQL = DBExecuteSQL()
     #dbExecuteSQL.switchToInMemory()
-    dbSetup = DBSetup()
-    customerDatabaseMapping = CustomerDatabaseMapping(dbSetup)
+    customerDatabaseMapping = CustomerDatabaseMapping()
     customerDatabaseMapping.customerDataBaseSetup()
     print(customerDatabaseMapping.getCustomerData())
     allCustomers = customerDatabaseMapping.createAllCustomers()

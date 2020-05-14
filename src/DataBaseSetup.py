@@ -1,14 +1,12 @@
-from CustomerDatabaseMapping import CustomerDatabaseMapping
-from DBSetup import DBSetup
+from src.CustomerDatabaseMapping import CustomerDatabaseMapping
+from src.DBSetup import DBSetup
 
 class DataBaseSetup:
 
-    dbSetup = None
     customerDatabaseMapping = None
 
     def __init__(self):
-        self.dbSetup = DBSetup()
-        self.customerDatabaseMapping = CustomerDatabaseMapping(self.dbSetup)
+        self.customerDatabaseMapping = CustomerDatabaseMapping()
 
     def setup(self):
         self.customerDatabaseMapping.customerDataBaseSetup()

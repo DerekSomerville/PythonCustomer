@@ -1,6 +1,6 @@
-from DataSourceInterface import DataSourceInterface
-from DBConnection import DBConnection
-from DBExecuteSQL import DBExecuteSQL
+from src.DataSourceInterface import DataSourceInterface
+from src.DBConnection import DBConnection
+from src.DBExecuteSQL import DBExecuteSQL
 import sqlite3
 
 class DatabaseGetData(DataSourceInterface):
