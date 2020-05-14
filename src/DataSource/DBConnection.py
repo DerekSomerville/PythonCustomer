@@ -1,9 +1,11 @@
 import sqlite3
+from src.Utilities.ErrorLogging import ErrorLogging
 class DBConnection:
 
     dbFileName = "resource/Database/applicationDB.db";
     inMemoryDatabase = ":memory:";
     sqlLiteUrl = dbFileName;
+    errorLogging = ErrorLogging()
 
     def setInMemory(self):
         self.sqlLiteUrl = self.inMemoryDatabase
@@ -13,7 +15,7 @@ class DBConnection:
         try:
             connection = sqlite3.connect(self.sqlLiteUrl)
         except sqlite3.Error as sqlExp:
-            print("createConnection:An error occurred:", sqlExp.args[0])
+            self.errorLogging.writeToLog("DBConnection.createConnection","An error occurred:" + sqlExp.args[0])
         return connection
 
 def main():

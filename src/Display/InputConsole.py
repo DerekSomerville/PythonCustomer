@@ -1,10 +1,11 @@
 from src.Display.Input import Input
 from src.DataSource.WriteToFile import WriteToFile
+from src.DataSource.DataSourceConstants import *
 
 class InputConsole(Input):
 
     writeToFile = True
-    userInputWriteToFile = WriteToFile("userInputLog.csv")
+    userInputWriteToFile = WriteToFile(USERACTION_FOLDER,INPUT_LOG)
 
     def getInputString(self, request):
         userInput = input(request)

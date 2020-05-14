@@ -3,9 +3,12 @@ from src.DataSource.ReadCSVFile import ReadCSVFile
 from src.DataSource.DBSetup import DBSetup
 from src.DataSource.DatabaseGetData import DatabaseGetData
 from src.DataSource.DBExecuteSQL import DBExecuteSQL
+from src.DataSource.DataSourceConstants import *
+from src.Utilities.ErrorLogging import ErrorLogging
 
 class CustomerDatabaseMapping:
 
+    errorLogging = ErrorLogging()
     customerTableName = Customer.dataSourceName
 
     emailAddressPosition = 0
@@ -26,11 +29,17 @@ class CustomerDatabaseMapping:
             customerDetails[self.passwordPosition]
         )
         return customer
-    
+
+    def validateDataFromFileHeader(self, header):
+        return header == self.dataSourceFields
 
     def getCustomerDataFromFile(self):
         customerFileReader = ReadCSVFile()
-        return customerFileReader.getFileData("Entities/",self.customerTableName + ".csv")
+        customerData = customerFileReader.getFileData(ENTITIES_FOLDER,self.customerTableName + ".csv")
+        header = customerData.pop(0)
+        if not self.validateDataFromFileHeader(header):
+            self.errorLogging.writeToLog("CustomerDatabaseMapping.getCustomerDataFromFile","An error occurred:" + sqlExp.args[0])
+        return customerData
 
     def customerDataBaseSetup(self):
         self.dbSetup.dropTable(self.customerTableName)

@@ -1,10 +1,12 @@
 import sqlite3
 from src.DataSource.DBConnection import DBConnection
 from src.DataSource.DBExecuteSQL import DBExecuteSQL
+from src.Utilities.ErrorLogging import ErrorLogging
 
 class DBSetup:
 
     dbExecuteSQL = DBExecuteSQL()
+    errorLogging = ErrorLogging()
 
     def generateDropTable(self,tableName):
         return "DROP TABLE IF EXISTS " + tableName
@@ -14,7 +16,7 @@ class DBSetup:
         try:
             self.dbExecuteSQL.executeSQLCommand(sqlDropTable)
         except sqlite3.Error as sqlExp:
-            print("dropTable:An error occurred:", sqlExp.args[0])
+            self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
 
     def generateCreateTableStatement(self,tableName, fieldNames):
         sqlCreateTable =  "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
@@ -40,7 +42,7 @@ class DBSetup:
         try:
             self.dbExecuteSQL.executeSQLCommand(sqlCreateTable)
         except sqlite3.Error as sqlExp:
-            print("createTable:An error occurred:", sqlExp.args[0])
+            self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
 
     def generateInsertStatement(self,tableName, fieldNames):
         counter = 0
@@ -66,7 +68,7 @@ class DBSetup:
         try:
             self.dbExecuteSQL.insertData(sqlCommand, dataRows)
         except sqlite3.Error as sqlExp:
-            print("An error occurred in populateEntity:", sqlExp.args[0])
+            self.errorLogging.writeToLog("DBSetup.populateEntity","An error occurred:" + sqlExp.args[0])
 
 
 def main():

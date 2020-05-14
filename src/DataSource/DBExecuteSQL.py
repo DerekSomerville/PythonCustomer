@@ -1,9 +1,11 @@
 import sqlite3
 from src.DataSource.DBConnection import DBConnection
+from src.Utilities.ErrorLogging import ErrorLogging
 
 class DBExecuteSQL(object):
 
     dbConnector = DBConnection()
+    errorLogging = ErrorLogging()
     connection = None
     _instance = None
 
@@ -19,7 +21,10 @@ class DBExecuteSQL(object):
 
     def getConnection(self):
         if self.connection == None:
-            self.connection = self.dbConnector.createConnection()
+            try:
+                self.connection = self.dbConnector.createConnection()
+            except sqlite3.Error as sqlExp:
+                self.errorLogging.writeToLog("DBExecuteSQL.getConnection","An error occurred:" + sqlExp.args[0])
         return self.connection
 
     def executeSQLCommand(self,sqlCommand):
@@ -28,8 +33,8 @@ class DBExecuteSQL(object):
             executeCursor.execute(sqlCommand)
             executeCursor.close()
         except sqlite3.Error as sqlExp:
-            print("executeSQLCommand:An error occurred:", sqlExp.args[0])
-            print("With command:", sqlCommand)
+            self.errorLogging.writeToLog("DBExecuteSQL.executeSQLCommand","An error occurred:" + sqlExp.args[0])
+            self.errorLogging.writeToLog("DBExecuteSQL.executeSQLCommand","With command:" + sqlCommand)
             raise
         self.getConnection().commit()
 
@@ -38,7 +43,7 @@ class DBExecuteSQL(object):
         try:
             insertDataCursor.executemany(sqlCommand,dataRows)
         except sqlite3.Error as sqlExp:
-            print("An error occurred in populateEntity:", sqlExp.args[0])
+            self.errorLogging.writeToLog("DBExecuteSQL.insertData","An error occurred:" + sqlExp.args[0])
         insertDataCursor.close()
         self.getConnection().commit()
 
@@ -49,8 +54,8 @@ class DBExecuteSQL(object):
             selectCursor.execute(selectCommand)
             sqlData = selectCursor.fetchall()
         except sqlite3.Error as sqlExp:
-            print("executeSqlSelect:An error occurred:", sqlExp.args[0])
-            print("With select statement:", selectCommand)
+            self.errorLogging.writeToLog("DBExecuteSQL.executeSqlSelect","An error occurred:" + sqlExp.args[0])
+            self.errorLogging.writeToLog("DBExecuteSQL.executeSqlSelect","With command:" + selectCommand)
             raise
         selectCursor.close()
         return sqlData
