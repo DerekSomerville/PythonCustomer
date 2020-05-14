@@ -1,8 +1,8 @@
 import unittest
 from unittest import mock
 from unittest.mock import MagicMock
-from src.ReadCSVFile import ReadCSVFile
-from src.CustomerDatabaseMapping import CustomerDatabaseMapping
+from src.DataSource.ReadCSVFile import ReadCSVFile
+from src.EntitiesDatabaseMapping.CustomerDatabaseMapping import CustomerDatabaseMapping
 
 class TestCustomerDatabaseMapping(unittest.TestCase):
 

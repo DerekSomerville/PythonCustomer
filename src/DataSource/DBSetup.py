@@ -1,6 +1,6 @@
 import sqlite3
-from src.DBConnection import DBConnection
-from src.DBExecuteSQL import DBExecuteSQL
+from src.DataSource.DBConnection import DBConnection
+from src.DataSource.DBExecuteSQL import DBExecuteSQL
 
 class DBSetup:
 

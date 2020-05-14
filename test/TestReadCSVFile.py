@@ -1,7 +1,7 @@
 import unittest, csv
 from unittest import mock
 from unittest.mock import MagicMock
-from src.ReadCSVFile import ReadCSVFile
+from src.DataSource.ReadCSVFile import ReadCSVFile
 
 class TestReadCSVFile(unittest.TestCase):
 

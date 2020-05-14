@@ -1,5 +1,5 @@
 import sqlite3
-from src.DBConnection import DBConnection
+from src.DataSource.DBConnection import DBConnection
 
 class DBExecuteSQL(object):
 

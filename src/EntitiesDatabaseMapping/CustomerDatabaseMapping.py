@@ -1,8 +1,8 @@
-from src.Customer import Customer
-from src.ReadCSVFile import ReadCSVFile
-from src.DBSetup import DBSetup
-from src.DatabaseGetData import DatabaseGetData
-from src.DBExecuteSQL import DBExecuteSQL
+from src.Entities.Customer import Customer
+from src.DataSource.ReadCSVFile import ReadCSVFile
+from src.DataSource.DBSetup import DBSetup
+from src.DataSource.DatabaseGetData import DatabaseGetData
+from src.DataSource.DBExecuteSQL import DBExecuteSQL
 
 class CustomerDatabaseMapping:
 
