@@ -11,7 +11,7 @@ class TestOutputConsole(unittest.TestCase):
     def testPrint(self):
         self.outputConsole.print("A test of outputConsole.print")
         outputLine = self.readCSCFile.getLastLines(USERACTION_FOLDER,OUTPUT_LOG,1)
-        self.assertEqual("A test of outputConsole.print", outputLine)
+        self.assertEqual(["A test of outputConsole.print"], outputLine)
 
 def main():
     unittest.main()
