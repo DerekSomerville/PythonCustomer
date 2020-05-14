@@ -41,12 +41,24 @@ class CustomerDatabaseMapping:
             self.errorLogging.writeToLog("CustomerDatabaseMapping.getCustomerDataFromFile","An error occurred:" + sqlExp.args[0])
         return customerData
 
-    def customerDataBaseSetup(self):
-        self.dbSetup.dropTable(self.customerTableName)
-        self.dbSetup.createTable(self.customerTableName,self.dataSourceFields)
+    def customerCreateTable(self):
+        try:
+            self.dbSetup.dropTable(self.customerTableName)
+            self.dbSetup.createTable(self.customerTableName,self.dataSourceFields)
+        except:
+            self.errorLogging.writeToLog("CustomerDatabaseMapping.customerCreateTable","An error occurred:" + sys.exc_info()[0])
+
+    def customerPopulateDataSource(self):
         customerInsertSql = self.dbSetup.generateInsertStatement(self.customerTableName,self.dataSourceFields)
         customerData = self.getCustomerDataFromFile()
-        self.dbSetup.populateEntity(customerInsertSql,customerData)
+        try:
+            self.dbSetup.populateEntity(customerInsertSql,customerData)
+        except:
+            self.errorLogging.writeToLog("CustomerDatabaseMapping.customerCreateTable","An error occurred:" + sys.exc_info()[0])
+
+    def customerDataBaseSetup(self):
+        self.customerCreateTable()
+        self.customerPopulateDataSource()
 
     def getCustomerData(self):
         return self.dataSource.getData(self.customerTableName,self.dataSourceFields)

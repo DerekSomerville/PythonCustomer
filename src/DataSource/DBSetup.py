@@ -17,6 +17,7 @@ class DBSetup:
             self.dbExecuteSQL.executeSQLCommand(sqlDropTable)
         except sqlite3.Error as sqlExp:
             self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
+            raise
 
     def generateCreateTableStatement(self,tableName, fieldNames):
         sqlCreateTable =  "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
@@ -43,6 +44,7 @@ class DBSetup:
             self.dbExecuteSQL.executeSQLCommand(sqlCreateTable)
         except sqlite3.Error as sqlExp:
             self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
+            raise
 
     def generateInsertStatement(self,tableName, fieldNames):
         counter = 0
@@ -69,7 +71,7 @@ class DBSetup:
             self.dbExecuteSQL.insertData(sqlCommand, dataRows)
         except sqlite3.Error as sqlExp:
             self.errorLogging.writeToLog("DBSetup.populateEntity","An error occurred:" + sqlExp.args[0])
-
+            raise
 
 def main():
     dbSetup = DBSetup()
