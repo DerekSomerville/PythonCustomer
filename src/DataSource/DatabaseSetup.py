@@ -1,7 +1,6 @@
 from src.EntitiesDatabaseMapping.CustomerDatabaseMapping import CustomerDatabaseMapping
-from src.DataSource.DBSetup import DBSetup
 
-class DataBaseSetup:
+class DatabaseSetup:
 
     customerDatabaseMapping = None
 

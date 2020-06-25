@@ -6,6 +6,13 @@ class DBConnection:
     inMemoryDatabase = ":memory:";
     sqlLiteUrl = dbFileName;
     errorLogging = ErrorLogging()
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(DBConnection, cls).__new__(
+                                cls, *args, **kwargs)
+        return cls._instance
 
     def setInMemory(self):
         self.sqlLiteUrl = self.inMemoryDatabase

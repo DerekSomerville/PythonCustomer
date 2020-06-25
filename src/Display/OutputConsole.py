@@ -7,10 +7,10 @@ class OutputConsole(Output):
     writeToFile = True
     outputWriteToFile = WriteToFile(USERACTION_FOLDER,OUTPUT_LOG)
 
-    def print(self, output):
+    def print(self, message):
         if self.writeToFile:
-            self.outputWriteToFile.writeToFile(output)
-        print(output)
+            self.outputWriteToFile.writeToFile(message)
+        print(message)
 
 def main():
     outputConsole = OutputConsole()
