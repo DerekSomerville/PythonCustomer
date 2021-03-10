@@ -1,14 +1,13 @@
 import csv
 import subprocess
-import os
+from pathlib import Path
 
 class ReadCSVFile :
 
-    filePathPrefix = "resource/"
-
+    filePathPrefix = str(Path("../resource/").resolve())
     def getFileData(self, directory,  fileName):
         fileData = []
-        with open(self.filePathPrefix + directory + fileName,'rt')as dataFile:
+        with open(self.filePathPrefix + "/" + directory + fileName,'rt')as dataFile:
             fileReader = csv.reader(dataFile)
             for row in fileReader:
                 fileData.append(row)

@@ -1,4 +1,4 @@
-ENTITIES_FOLDER = "Entities/"
+ENTITIES_FOLDER = "Fruits/"
 USERACTION_FOLDER = "UserActions/"
 ERRORLOG_FOLDER = "ErrorLog/"
 INPUT_LOG = "userInputLog.csv"
