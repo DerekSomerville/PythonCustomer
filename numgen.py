@@ -4,6 +4,24 @@ def numgen(): #gets a random digit
    number = random.randint(0,9)
    return str(number)
 
-#makes a rondom 6 digit orger number
-ordernum = numgen() + numgen() + numgen()+ numgen()+ numgen()+ numgen()
-print(ordernum)
+def ordercode():#makes a random 6 digit number
+   ordernum = numgen() + numgen() + numgen() + numgen() + numgen() + numgen()
+   return ordernum
+
+
+with open("ordernum.txt") as file:
+    ordernumber = [line.rstrip() for line in file]
+    file.close
+newcode = ordercode()
+inuse = True
+
+while inuse == True:
+   if newcode in ordernumber:
+      newcode = ordercode()
+   else:
+      inuse = False
+      file = open("ordernum.txt", "a")
+      file.write("\n"+ newcode)
+      file.close
+
+
