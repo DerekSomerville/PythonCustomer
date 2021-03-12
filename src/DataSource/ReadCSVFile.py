@@ -14,7 +14,9 @@ class ReadCSVFile(ReadInterface):
             fileReader = csv.reader(dataFile)
             for row in fileReader:
                 fileData.append(row)
+
         return fileData
 
     def getLastLines(self,directory, fileName, numerOfLines):
-        return self.getFileData(directory, fileName)[-1*numerOfLines]
+        return self.getConfig(directory, fileName)[-1*numerOfLines]
+
