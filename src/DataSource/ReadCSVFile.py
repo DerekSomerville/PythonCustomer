@@ -2,10 +2,13 @@ import csv
 import subprocess
 from pathlib import Path
 
-class ReadCSVFile :
+from src.DataSource.ReadInterface import ReadInterface
+
+
+class ReadCSVFile(ReadInterface):
 
     filePathPrefix = str(Path("../resource/").resolve())
-    def getFileData(self, directory,  fileName):
+    def getConfig(self, directory,  fileName):
         fileData = []
         with open(self.filePathPrefix + "/" + directory + fileName,'rt')as dataFile:
             fileReader = csv.reader(dataFile)
