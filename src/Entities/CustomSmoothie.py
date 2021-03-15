@@ -9,8 +9,8 @@ class CustomSmoothie():
 
     #Returns a string describing the CustomSmoothie. This string can be appended to the customer's Order/Receipt
     def describeCustomSmoothie(self):
-        ingredientsList = " ".join(self.ingredients)
-        return f"Custom Smoothie:, {ingredientsList}"
+        ingredientsList = ", ".join(self.ingredients)
+        return f"Custom Smoothie: {ingredientsList}"
 
 #Example of creating a CustomSmoothie instance, ingredient are passed in as a list.
 mySmoothie = CustomSmoothie(['Banana', 'Bacon', 'Apple', 'Tea', 'Coffee'])
