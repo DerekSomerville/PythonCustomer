@@ -12,7 +12,7 @@ def addmenu(name_item, price_pound = 0, price_pence = 0):
     if len(str(price_pence)) == 1:
         price_pence = "0" + str(price_pence)
     newitem =  name_item + "^" + str(price_pound) + "." + str(price_pence)
-    menu_file = open("..\..\\resource\Entities\menu.txt", "a")
+    menu_file = open("resource\Entities\menu.txt", "a")
     menu_file.write("\n"+ newitem)
     menu_file.close
 

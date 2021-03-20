@@ -1,5 +1,5 @@
 def view_menu():
-    with open("..\..\\resource\Entities\menu.txt") as menu_file:
+    with open("resource\Entities\menu.txt") as menu_file:
         items_menu = [line.rstrip() for line in menu_file]
         menu_file.close
     for items in items_menu:

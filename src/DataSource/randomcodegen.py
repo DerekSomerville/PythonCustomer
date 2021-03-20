@@ -9,7 +9,7 @@ def ordercode():#makes a random 6 digit number
    return ordernum
 
 def order_number_generator():
-   with open("..\..\\resource\Entities\ordernum.txt") as order_number_file:
+   with open("resource\Entities\ordernum.txt") as order_number_file:
        order_number = [line.rstrip() for line in order_number_file]
        order_number_file.close
    newcode = ordercode()
@@ -20,6 +20,8 @@ def order_number_generator():
          newcode = ordercode()
       else:
          inuse = False
-         order_number_file = open("..\..\\resource\Entities\ordernum.txt", "a")
+         order_number_file = open("resource\Entities\ordernum.txt", "a")
          order_number_file.write("\n"+ newcode)
          order_number_file.close
+         return newcode
+
