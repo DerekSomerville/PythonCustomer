@@ -4,7 +4,7 @@ from pathlib import Path
 
 class ReadCSVFile :
 
-    filePathPrefix = str(Path("../resource/").resolve())
+    filePathPrefix = str(Path("../../resource/").resolve())
     def getFileData(self, directory,  fileName):
         fileData = []
         with open(self.filePathPrefix + "/" + directory + fileName,'rt')as dataFile:
