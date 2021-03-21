@@ -6,15 +6,35 @@ from src.DataSource.DataSourceConstants import *
 
 class TestReadCSVFile(unittest.TestCase):
 
+#Stubs
+
     readCSVFile = ReadCSVFile()
 
     def test_getCustomerDataFromFile(self):
-        fileData = self.readCSVFile.getFileData(ENTITIES_FOLDER,"customer" + ".csv")
-        self.assertEqual( fileData[1] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
+        fileData = self.readCSVFile.getConfig(ENTITIES_FOLDER,"customer" + ".csv")
+        self.assertEqual( fileData[0] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
     def test_getLastLinesFromFile(self):
         fileLines = self.readCSVFile.getLastLines( ENTITIES_FOLDER, "customer" + ".csv",1)
-        self.assertEqual( fileLines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
+        self.assertEqual( fileLines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
+
+#Mocks
+
+    def test_readFileData(self):
+
+        self.readCSVFile.getConfig = MagicMock(return_value=[['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'],['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321']])
+        self.assertEqual(self.readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
+
+    def test_readFileDataDerek(self):
+
+        self.readCSVFile.getConfig = MagicMock(return_value=[['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234']])
+        self.assertEqual(self.readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
+
+    def test_readFileDataReal(self):
+
+        readCSVFile = ReadCSVFile()
+        self.assertEqual(readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
+
 
 def main():
     unittest.main()
