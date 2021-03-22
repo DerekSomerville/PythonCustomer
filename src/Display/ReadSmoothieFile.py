@@ -7,9 +7,3 @@ class Menu:
         readCSVFile = ReadCSVFile()
         smoothie_Menu = readCSVFile.getFileData(ENTITIES_FOLDER, "Smoothies" + ".csv")
         return smoothie_Menu
-
-def main():
-    Smoothie_Menu()
-main()
-
-print(Smoothie_Menu())
