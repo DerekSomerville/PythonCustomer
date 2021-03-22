@@ -7,8 +7,9 @@ from src.DataSource.ReadInterface import ReadInterface
 
 class ReadCSVFile(ReadInterface):
 
-    filePathPrefix = str(Path("../resource/").resolve())
-    def getConfig(self, directory,  fileName):
+    filePathPrefix = str(Path("../../resource/").resolve())
+    def getFileData(self, directory,  fileName):
+
         fileData = []
         with open(self.filePathPrefix + "/" + directory + fileName,'rt')as dataFile:
             fileReader = csv.reader(dataFile)
