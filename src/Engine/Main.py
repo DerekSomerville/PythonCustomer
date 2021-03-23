@@ -3,13 +3,16 @@ from src.Entities.CustomerOrder import CustomerOrder
 
 
 def main():
+    combine = ""
     menu = Menu()
     customerMenu = menu.Smoothie_Menu()
 
-    print('Please select a smooth from our menu', '\n', str(customerMenu)
-          .replace('[', '').replace(']', '').replace(',', '\n').replace("'", ''))
+    for words in customerMenu:
+        combine += "\n" + ", ".join(words
+                                    )
+    print('Please select a smoothie from our menu', combine)
 
-    print('Enter the number of the smoothie you want to order')
+    print('\n','Enter the number of the smoothie you want to order')
 
     order = CustomerOrder()
     currentOrder = order.placeOrder()
