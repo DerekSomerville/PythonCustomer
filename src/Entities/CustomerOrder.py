@@ -6,7 +6,7 @@ class CustomerOrder:
 
     def placeOrder(self):
         orderNumber = int(input())
-        smoothieMenu = Menu.SmoothieMenu(self)
+        smoothieMenu = Menu.Smoothie_Menu(self)
         while True:
             for item in smoothieMenu:
                 if item[0][0] == str(orderNumber):
