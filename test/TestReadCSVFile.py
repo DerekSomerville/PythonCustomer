@@ -11,11 +11,11 @@ class TestReadCSVFile(unittest.TestCase):
     readCSVFile = ReadCSVFile()
 
     def test_getCustomerDataFromFile(self):
-        fileData = self.readCSVFile.getConfig(ENTITIES_FOLDER,"customer" + ".csv")
+        fileData = self.readCSVFile.getConfig(entitiesFolder,"customer" + ".csv")
         self.assertEqual( fileData[0] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
     def test_getLastLinesFromFile(self):
-        fileLines = self.readCSVFile.getLastLines( ENTITIES_FOLDER, "customer" + ".csv",1)
+        fileLines = self.readCSVFile.getLastLines( entitiesFolder, "customer" + ".csv",1)
         self.assertEqual( fileLines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
 
 #Mocks
@@ -23,17 +23,17 @@ class TestReadCSVFile(unittest.TestCase):
     def test_readFileData(self):
 
         self.readCSVFile.getConfig = MagicMock(return_value=[['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'],['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321']])
-        self.assertEqual(self.readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
+        self.assertEqual(self.readCSVFile.getLastLines(entitiesFolder,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
 
     def test_readFileDataDerek(self):
 
         self.readCSVFile.getConfig = MagicMock(return_value=[['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234']])
-        self.assertEqual(self.readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
+        self.assertEqual(self.readCSVFile.getLastLines(entitiesFolder,"customer" + ".csv", 1) ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
     def test_readFileDataReal(self):
 
         readCSVFile = ReadCSVFile()
-        self.assertEqual(readCSVFile.getLastLines(ENTITIES_FOLDER,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
+        self.assertEqual(readCSVFile.getLastLines(entitiesFolder,"customer" + ".csv", 1) ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
 
 
 def main():
