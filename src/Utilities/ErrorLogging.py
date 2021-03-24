@@ -4,7 +4,7 @@ from src.DataSource.WriteToFile import WriteToFile
 class ErrorLogging:
 
     _instance = None
-    writeErrorLog = WriteToFile(ERRORLOG_FOLDER,ERROR_LOG)
+    writeErrorLog = WriteToFile(errorLogFolder,errorLog)
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:

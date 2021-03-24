@@ -34,7 +34,7 @@ class CustomerDatabaseMapping:
         return header == self.dataSourceFields
 
     def getCustomerDataFromFile(self):
-        customerData = self.customerFileReader.getConfig(ENTITIES_FOLDER,self.customerTableName + ".csv")
+        customerData = self.customerFileReader.getConfig(entitiesFolder,self.customerTableName + ".csv")
         #if not self.validateDataFromFileHeader(header):
         #   self.errorLogging.writeToLog("CustomerDatabaseMapping.getCustomerDataFromFile","An error occurred:" + sqlExp.args[0])
         return customerData
