@@ -1,0 +1,15 @@
+Index: resource/UserActions/userOutputLog.csv
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Hello World:)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resource/UserActions/userOutputLog.csv	(revision 31db200fca4ebfb60318db04268b135e44646ae8)
++++ resource/UserActions/userOutputLog.csv	(date 1616429228778)
+@@ -1,1 +1,5 @@
+ Hello World:)
++Hello World:)
++Hello World:)
++Hello World:)
++Hello World:)
