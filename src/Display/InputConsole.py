@@ -5,7 +5,7 @@ from src.DataSource.DataSourceConstants import *
 class InputConsole(Input):
 
     writeToFile = True
-    userInputWriteToFile = WriteToFile(USERACTION_FOLDER,INPUT_LOG)
+    userInputWriteToFile = WriteToFile(userActionFolder,inputLog)
 
     def getInputString(self, request):
         userInput = input(request)

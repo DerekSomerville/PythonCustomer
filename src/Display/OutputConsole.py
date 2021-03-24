@@ -5,7 +5,7 @@ from src.DataSource.DataSourceConstants import *
 class OutputConsole(Output):
 
     writeToFile = True
-    outputWriteToFile = WriteToFile(USERACTION_FOLDER,OUTPUT_LOG)
+    outputWriteToFile = WriteToFile(userActionFolder,outputLog)
 
     def print(self, message):
         if self.writeToFile:
