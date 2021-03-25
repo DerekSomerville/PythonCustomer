@@ -1,11 +1,11 @@
-from src.Display.ReadSmoothieFile import Menu
+from src.Display.ReadSmoothieFile import ReadSmoothieFile
 from src.Entities.CustomerOrder import CustomerOrder
 
 
 def main():
     combine = ""
-    menu = Menu()
-    customerMenu = menu.Smoothie_Menu()
+    menu = ReadSmoothieFile()
+    customerMenu = menu.smoothieFile()
 
     for words in customerMenu:
         combine += "\n" + ", ".join(words)
