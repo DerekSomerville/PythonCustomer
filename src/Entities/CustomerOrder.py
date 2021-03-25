@@ -1,4 +1,4 @@
-from src.Display.ReadSmoothieFile import Menu
+from src.Display.ReadSmoothieFile import ReadSmoothieFile
 
 class CustomerOrder:
     def __init__(self, orderedItems=[]):
@@ -6,7 +6,7 @@ class CustomerOrder:
 
     def placeOrder(self):
         orderNumber = int(input())
-        smoothieMenu = Menu.smoothieMenu(self)
+        smoothieMenu = ReadSmoothieFile.smoothieFile(self)
         while True:
             for item in smoothieMenu:
                 if item[0][0] == str(orderNumber):
