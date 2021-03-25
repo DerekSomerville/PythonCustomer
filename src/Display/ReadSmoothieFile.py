@@ -2,8 +2,8 @@ import csv
 from src.DataSource.ReadCSVFile import ReadCSVFile
 from src.DataSource.DataSourceConstants import *
 
-class Menu:
-    def smoothieMenu(self):
+class ReadSmoothieFile:
+    def smoothieFile(self):
         readCSVFile = ReadCSVFile()
         smoothieMenu = readCSVFile.getFileData(entitiesFolder, "Smoothies" + ".csv")
         return smoothieMenu
