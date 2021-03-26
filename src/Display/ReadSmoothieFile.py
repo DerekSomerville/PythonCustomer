@@ -5,5 +5,5 @@ from src.DataSource.DataSourceConstants import *
 class ReadSmoothieFile:
     def smoothieFile(self, menuName):
         readCSVFile = ReadCSVFile()
-        smoothieMenu = readCSVFile.getFileData(entitiesFolder, menuName + ".csv")
+        smoothieMenu = readCSVFile.getConfig(entitiesFolder, menuName + ".csv")
         return smoothieMenu
