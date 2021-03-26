@@ -53,17 +53,22 @@ class CustomerOrder:
                 for item in range(len(self.orderedSmoothies)):
                     print(item, self.orderedSmoothies[item])
 
-                removedItem = input("\nSelect the number for item you'd like to remove\n")
+                while True:
 
-                try:
-                    removedItem = int(removedItem)
-                except ValueError:
-                    continue
+                    removedItem = input("\nSelect the number for item you'd like to remove\n")
 
-                print("You have removed:", self.orderedSmoothies.pop(removedItem))
-                print("Your order is now:", self.orderedSmoothies)
-                self.removeItem()
-                break
+                    try:
+                        removedItem = int(removedItem)
+                        print("You have removed:", self.orderedSmoothies.pop(removedItem))
+                        print("Your order is now:", self.orderedSmoothies)
+                        self.removeItem()
+                        break
+                    except ValueError:
+                        continue
+                    except IndexError:
+                        print("Invalid number")
+            break
+
 
     def orderTotal(self):
         if isinstance(self.orderedSmoothies, str):
