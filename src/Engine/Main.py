@@ -1,5 +1,6 @@
 from src.Display.ReadSmoothieFile import ReadSmoothieFile
 from src.Entities.CustomerOrder import CustomerOrder
+import sys
 
 
 def main():
@@ -12,12 +13,14 @@ def main():
 
     print('Please select a smoothie from our menu', combine)
 
-    print('\n','Enter the number of the smoothie you want to order')
-
     order = CustomerOrder()
-    currentOrder = order.placeOrder()
+    orderedSmoothies = order.addItem()
+    print("\nYour order is:", order.orderReview(orderedSmoothies))
 
-    print('Is your order correct on the screen?', str(currentOrder))
+    if isinstance(orderedSmoothies, str):
+        sys.exit()
+    else:
+        order.removeItem()
 
 
 if __name__ == '__main__':

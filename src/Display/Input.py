@@ -9,7 +9,7 @@ class Input(ABC):
     def getInputInt(self, request):
         response = self.getInputString(request)
         while not str(response).isnumeric():
-            response = self.getInputString("Please enter an integer")
+            response = self.getInputString("Please enter a number")
         return int(response)
 
 
