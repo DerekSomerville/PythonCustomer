@@ -3,7 +3,7 @@ from pathlib import Path
 class WriteToFile:
     # Here will be the instance stored.
     file = ""
-    filePath = str(Path("../../resource/").resolve())
+    filePath = str(Path("resource/").resolve())
     directory = ""
     fileName = ""
     def __init__(self,directory,fileName):
