@@ -2,6 +2,7 @@ import sys
 
 from src.Display.InputConsole import InputConsole
 from src.Display.ReadSmoothieFile import ReadSmoothieFile
+from src.Entities.CustomerFunds import CustomerFunds
 
 
 class CustomerOrder:
@@ -11,6 +12,7 @@ class CustomerOrder:
         self.orderNumber = InputConsole()
         self.combineOrder = ""
         self.customerBill = []
+
 
     def addItem(self):
         userChoice = self.orderNumber.getInputInt("Enter the smoothie number to add it to your order or 0 to cancel order\n")
