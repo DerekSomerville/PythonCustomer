@@ -5,16 +5,20 @@ class CustomerFunds:
     def __init__(self):
         self.wallet = InputConsole()
         self.userFunds = ""
+        self.userPayment = ""
 
     def getFunds(self):
         self.userFunds = self.wallet.getInputInt("Enter the amount of funds you have available: \n")
-        return "£" + str(self.userFunds)
+        return "Your current funds are: " + "£" + str(self.userFunds)
 
-    def payOrder(self):
-
-        self.userFunds = self.userFunds - sum(CustomerOrder.customerBill)
-        return "Your remaining funds are now: " + "£" + str(self.userFunds)
-
+    def payOrder(self, orderTotal):
+        customerOrder = CustomerOrder()
+        self.userPayment = int(self.userFunds) - orderTotal
+        if self.userFunds < 0:
+            return "You don't have enough funds to purchase these items."
+        else:
+            self.userFunds = self.userPayment
+            return "Your remaining funds are: " + "£" + str(self.userFunds)
 
 
 

@@ -2,7 +2,6 @@ import sys
 
 from src.Display.InputConsole import InputConsole
 from src.Display.ReadSmoothieFile import ReadSmoothieFile
-from src.Entities.CustomerFunds import CustomerFunds
 
 
 class CustomerOrder:
@@ -80,4 +79,4 @@ class CustomerOrder:
                 item = float(item[1])
                 self.customerBill.append(item)
 
-            print("Final bill is, £" + str(sum(self.customerBill)))
+            return int(sum(self.customerBill))
