@@ -48,7 +48,6 @@ class CustomerOrder:
                 continue
 
             if confirmOrRemove == 1:
-                self.orderTotal()
                 break
             elif confirmOrRemove == 2:
                 for item in range(len(self.orderedSmoothies)):

@@ -12,9 +12,8 @@ class CustomerFunds:
         return "Your current funds are: " + "£" + str(self.userFunds)
 
     def payOrder(self, orderTotal):
-        customerOrder = CustomerOrder()
         self.userPayment = int(self.userFunds) - orderTotal
-        if self.userFunds < 0:
+        if self.userPayment < 0:
             return "You don't have enough funds to purchase these items."
         else:
             self.userFunds = self.userPayment

@@ -26,7 +26,9 @@ def main():
     else:
         order.removeItem()
 
-    print(customerFunds.payOrder(order.orderTotal()))
+    orderTotal = order.orderTotal()
+    print("Your total for the order is:" + " £" + str(orderTotal))
+    print(customerFunds.payOrder(orderTotal))
 
 
 if __name__ == '__main__':
