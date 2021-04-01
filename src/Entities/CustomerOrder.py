@@ -20,6 +20,7 @@ class CustomerOrder:
         self.combineOrder = ""
         self.customerBill = []
 
+
     def addItem(self):
         userChoice = self.input.getInputInt("Enter the smoothie number to add it to your order or 0 to cancel order\n")
 
@@ -55,7 +56,6 @@ class CustomerOrder:
                 continue
 
             if confirmOrRemove == 1:
-                self.orderTotal()
                 break
             elif confirmOrRemove == 2:
                 for item in range(len(self.orderedSmoothies)):
@@ -86,7 +86,5 @@ class CustomerOrder:
                 item = float(item[1])
                 self.customerBill.append(item)
 
-            print("Final bill is, £" + str(sum(self.customerBill)))
-
-    def setInput(self,input):
-        self.input = input
+            return int(sum(self.customerBill))
+          
