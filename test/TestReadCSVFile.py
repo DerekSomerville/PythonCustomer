@@ -6,8 +6,6 @@ from src.DataSource.DataSourceConstants import *
 
 class TestReadCSVFile(unittest.TestCase):
 
-#Stubs
-
     readCSVFile = ReadCSVFile()
 
     def test_getCustomerDataFromFile(self):
@@ -18,7 +16,7 @@ class TestReadCSVFile(unittest.TestCase):
         fileLines = self.readCSVFile.getLastLines( entitiesFolder, "customer" + ".csv",1)
         self.assertEqual( fileLines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', 'password'])
 
-#Mocks
+    #Mocks
 
     def test_readFileData(self):
 
