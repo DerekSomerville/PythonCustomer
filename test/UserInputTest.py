@@ -11,7 +11,7 @@ class UserInputTest(unittest.TestCase):
 
 
         fakeUserTestInput = TestInput()
-        fakeUserTestInput.setInputList([1,2,3,4,5,6])
+        fakeUserTestInput.setInputList([1,2,3,4,6])
 
         fakeCustomerOrder = CustomerOrder(fakeUserTestInput)
 
