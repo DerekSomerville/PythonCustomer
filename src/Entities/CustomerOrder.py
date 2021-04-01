@@ -5,16 +5,24 @@ from src.Display.ReadSmoothieFile import ReadSmoothieFile
 
 
 class CustomerOrder:
-    def __init__(self):
+
+    input = None
+
+    def __init__(self, input=None):
         self.orderedSmoothies = []
         self.smoothieMenu = ReadSmoothieFile.smoothieFile(self, "Smoothies")
-        self.orderNumber = InputConsole()
+
+        if input == None:
+            self.input = InputConsole()
+        else:
+            self.input = input
+
         self.combineOrder = ""
         self.customerBill = []
 
 
     def addItem(self):
-        userChoice = self.orderNumber.getInputInt("Enter the smoothie number to add it to your order or 0 to cancel order\n")
+        userChoice = self.input.getInputInt("Enter the smoothie number to add it to your order or 0 to cancel order\n")
 
         while userChoice != 0 and userChoice <= len(self.smoothieMenu):
             for item in self.smoothieMenu:
@@ -23,7 +31,7 @@ class CustomerOrder:
                     elem = self.orderedSmoothies.pop()
                     self.orderedSmoothies.append(elem)
                     print("You have added", elem)
-            userChoice = self.orderNumber.getInputInt(
+            userChoice = self.input.getInputInt(
                 "Enter another number if you want to add more items to your order or enter 0 to finish: ")
 
         if len(self.orderedSmoothies) > 0:
@@ -79,3 +87,4 @@ class CustomerOrder:
                 self.customerBill.append(item)
 
             return int(sum(self.customerBill))
+          
