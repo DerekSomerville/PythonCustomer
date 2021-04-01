@@ -14,11 +14,12 @@ class TestCustomerDatabaseMapping(unittest.TestCase):
         customerData = self.customerDatabaseMapping.getCustomerDataFromFile()
         self.assertEqual( customerData[0] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
+    # Stub
     def test_getCustomerDataFromStub(self):
         readCSVFile = StubCSV()
         self.customerDatabaseMapping.setCustomerFileReader(readCSVFile)
         customerData = self.customerDatabaseMapping.getCustomerDataFromFile()
-        self.assertEqual( customerData[0] ,['derek.somerville@glasgow.ac.uk','Derek', 'Somerville', '1234'])
+        self.assertEqual( customerData[0] ,['derek.somerville@glasgow.ac.uk','Derek', 'Somerville', 'password'])
 
 
 def main():

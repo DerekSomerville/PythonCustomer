@@ -5,18 +5,21 @@ import sys
 
 
 def main():
+    # Customer Wallet
     customerFunds = CustomerFunds()
-    print (customerFunds.getFunds())
+    print(customerFunds.getFunds())
+
+    # Menu
     combine = ""
     menu = ReadSmoothieFile()
     customerMenu = menu.smoothieFile("Smoothies")
-
 
     for words in customerMenu:
         combine += "\n" + ", ".join(words)
 
     print('Please select a smoothie from our menu', combine)
 
+    # Customer Order
     order = CustomerOrder()
     orderedSmoothies = order.addItem()
     print("\nYour order is:", order.orderReview(orderedSmoothies))
@@ -24,8 +27,9 @@ def main():
     if isinstance(orderedSmoothies, str):
         sys.exit()
     else:
-        order.removeItem()
+        order.confirmOrder()
 
+    # Order Total/Bill
     orderTotal = order.orderTotal()
     print("Your total for the order is:" + " £" + str(orderTotal))
     print(customerFunds.payOrder(orderTotal))

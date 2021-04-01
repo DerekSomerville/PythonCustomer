@@ -1,25 +1,24 @@
 import sys
-
 from src.Display.InputConsole import InputConsole
 from src.Display.ReadSmoothieFile import ReadSmoothieFile
+from src.Entities.CustomSmoothie import CustomSmoothie
 
 
 class CustomerOrder:
-
     input = None
 
     def __init__(self, input=None):
         self.orderedSmoothies = []
         self.smoothieMenu = ReadSmoothieFile.smoothieFile(self, "Smoothies")
+        self.combineOrder = ""
+        self.customerBill = []
+        self.confirmingOrder = True
+        self.removingItem = True
 
-        if input == None:
+        if input is None:
             self.input = InputConsole()
         else:
             self.input = input
-
-        self.combineOrder = ""
-        self.customerBill = []
-
 
     def addItem(self):
         userChoice = self.input.getInputInt("Enter the smoothie number to add it to your order or 0 to cancel order\n")
@@ -31,6 +30,10 @@ class CustomerOrder:
                     elem = self.orderedSmoothies.pop()
                     self.orderedSmoothies.append(elem)
                     print("You have added", elem)
+            if str(userChoice) == "5":
+                customSmoothie = CustomSmoothie()
+                print(customSmoothie.createCustomSmoothie())
+
             userChoice = self.input.getInputInt(
                 "Enter another number if you want to add more items to your order or enter 0 to finish: ")
 
@@ -47,8 +50,8 @@ class CustomerOrder:
                 self.combineOrder += "\n" + " £".join(item[0:])
             return self.combineOrder
 
-    def removeItem(self):
-        while True:
+    def confirmOrder(self):
+        while self.confirmingOrder:
             confirmOrRemove = input("\nEnter 1 to confirm order and pay or 2 to edit and remove items\n")
             try:
                 confirmOrRemove = int(confirmOrRemove)
@@ -56,27 +59,28 @@ class CustomerOrder:
                 continue
 
             if confirmOrRemove == 1:
-                break
+                self.confirmingOrder = False
             elif confirmOrRemove == 2:
                 for item in range(len(self.orderedSmoothies)):
                     print(item, self.orderedSmoothies[item])
+                self.removeItem()
+                self.confirmingOrder = False
 
-                while True:
+    def removeItem(self):
+        while self.removingItem:
+            removedItem = input("\nSelect the number for item you'd like to remove\n")
 
-                    removedItem = input("\nSelect the number for item you'd like to remove\n")
+            try:
+                removedItem = int(removedItem)
+                print("You have removed:", self.orderedSmoothies.pop(removedItem))
+                print("Your order is now:", self.orderedSmoothies)
+                self.confirmOrder()
+                self.removingItem = False
 
-                    try:
-                        removedItem = int(removedItem)
-                        print("You have removed:", self.orderedSmoothies.pop(removedItem))
-                        print("Your order is now:", self.orderedSmoothies)
-                        self.removeItem()
-                        break
-                    except ValueError:
-                        continue
-                    except IndexError:
-                        print("Invalid number")
-            break
-
+            except ValueError:
+                continue
+            except IndexError:
+                print("Invalid number")
 
     def orderTotal(self):
         if isinstance(self.orderedSmoothies, str):
@@ -87,4 +91,3 @@ class CustomerOrder:
                 self.customerBill.append(item)
 
             return int(sum(self.customerBill))
-          
