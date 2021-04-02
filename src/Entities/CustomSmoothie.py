@@ -4,12 +4,17 @@ from src.Display.InputConsole import InputConsole
 
 class CustomSmoothie:
 
-    def __init__(self):
-        self.userInput = InputConsole()
+    def __init__(self, userInput=None):
+
         self.selectedIngredients = []
         self.continueOrderingFlag = True
         self.continueRemovingFlag = True
         self.ingredientsMenu = ReadSmoothieFile.smoothieFile(self, 'Ingredients')
+
+        if userInput == None:
+            self.userInput = InputConsole()
+        else:
+            self.userInput = userInput
 
     def printMenu(self, menu):
 
