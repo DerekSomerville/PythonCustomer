@@ -38,7 +38,7 @@ class CustomerDatabaseMapping:
         customerData = customerFileReader.getFileData(ENTITIES_FOLDER,self.customerTableName + ".csv")
         header = customerData.pop(0)
         if not self.validateDataFromFileHeader(header):
-            self.errorLogging.writeToLog("CustomerDatabaseMapping.getCustomerDataFromFile","An error occurred:" + sqlExp.args[0])
+            print("CustomerDatabaseMapping.getCustomerDataFromFile","An error occurred:" + sqlExp.args[0])
         return customerData
 
     def customerCreateTable(self):
@@ -46,7 +46,7 @@ class CustomerDatabaseMapping:
             self.dbSetup.dropTable(self.customerTableName)
             self.dbSetup.createTable(self.customerTableName,self.dataSourceFields)
         except:
-            self.errorLogging.writeToLog("CustomerDatabaseMapping.customerCreateTable","An error occurred:" + sys.exc_info()[0])
+            print("CustomerDatabaseMapping.customerCreateTable","An error occurred:" )
 
     def customerPopulateDataSource(self):
         customerInsertSql = self.dbSetup.generateInsertStatement(self.customerTableName,self.dataSourceFields)
@@ -54,7 +54,7 @@ class CustomerDatabaseMapping:
         try:
             self.dbSetup.populateEntity(customerInsertSql,customerData)
         except:
-            self.errorLogging.writeToLog("CustomerDatabaseMapping.customerCreateTable","An error occurred:" + sys.exc_info()[0])
+            print("CustomerDatabaseMapping.customerCreateTable","An error occurred:" )
 
     def customerDataBaseSetup(self):
         self.customerCreateTable()
