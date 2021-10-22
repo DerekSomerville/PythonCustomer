@@ -4,8 +4,8 @@ from src.Utilities.ErrorLogging import ErrorLogging
 
 class DBExecuteSQL(object):
 
-    dbConnector = DBConnection()
-    errorLogging = ErrorLogging()
+    db_connector = DBConnection()
+    error_logging = ErrorLogging()
     connection = None
     _instance = None
 
@@ -15,54 +15,54 @@ class DBExecuteSQL(object):
                                 cls, *args, **kwargs)
         return cls._instance
 
-    def setDbConnector(self,dbConnector):
-        self.dbConnector = dbConnector
+    def set_db_connector(self,db_connector):
+        self.db_connector = db_connector
         self.connection = None
 
-    def getConnection(self):
+    def get_connection(self):
         if self.connection == None:
             try:
-                self.connection = self.dbConnector.createConnection()
-            except sqlite3.Error as sqlExp:
-                self.errorLogging.writeToLog("DBExecuteSQL.getConnection","An error occurred:" + sqlExp.args[0])
+                self.connection = self.db_connector.create_connection()
+            except sqlite3.Error as sql_exp:
+                self.error_logging.write_to_log("DBExecuteSQL.get_connection","An error occurred:" + sql_exp.args[0])
         return self.connection
 
-    def executeSQLCommand(self,sqlCommand):
+    def execute_sql_command(self,sql_command):
         try:
-            executeCursor = self.getConnection().cursor()
-            executeCursor.execute(sqlCommand)
-            executeCursor.close()
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBExecuteSQL.executeSQLCommand","An error occurred:" + sqlExp.args[0])
-            self.errorLogging.writeToLog("DBExecuteSQL.executeSQLCommand","With command:" + sqlCommand)
+            execute_cursor = self.get_connection().cursor()
+            execute_cursor.execute(sql_command)
+            execute_cursor.close()
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBExecuteSQL.execute_sql_command","An error occurred:" + sql_exp.args[0])
+            self.error_logging.write_to_log("DBExecuteSQL.execute_sql_command","With command:" + sql_command)
             raise
-        self.getConnection().commit()
+        self.get_connection().commit()
 
-    def insertData(self, sqlCommand, dataRows):
-        insertDataCursor = self.getConnection().cursor()
+    def insert_data(self, sql_command, data_rows):
+        insert_data_cursor = self.get_connection().cursor()
         try:
-            insertDataCursor.executemany(sqlCommand,dataRows)
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBExecuteSQL.insertData","An error occurred:" + sqlExp.args[0])
-        insertDataCursor.close()
-        self.getConnection().commit()
+            insert_data_cursor.executemany(sql_command,data_rows)
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBExecuteSQL.insert_data","An error occurred:" + sql_exp.args[0])
+        insert_data_cursor.close()
+        self.get_connection().commit()
 
-    def executeSqlSelect(self,selectCommand):
-        sqlData = []
+    def execute_sql_select(self,select_command):
+        sql_data = []
         try:
-            selectCursor = self.getConnection().cursor()
-            selectCursor.execute(selectCommand)
-            sqlData = selectCursor.fetchall()
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBExecuteSQL.executeSqlSelect","An error occurred:" + sqlExp.args[0])
-            self.errorLogging.writeToLog("DBExecuteSQL.executeSqlSelect","With command:" + selectCommand)
+            select_cursor = self.get_connection().cursor()
+            select_cursor.execute(select_command)
+            sql_data = select_cursor.fetchall()
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBExecuteSQL.execute_sql_select","An error occurred:" + sql_exp.args[0])
+            self.error_logging.write_to_log("DBExecuteSQL.execute_sql_select","With command:" + select_command)
             raise
-        selectCursor.close()
-        return sqlData
+        select_cursor.close()
+        return sql_data
 
-    def getListOfTables(self):
-        return self.executeSqlSelect("SELECT name FROM sqlite_master WHERE type='table';")
+    def get_list_of_tables(self):
+        return self.execute_sql_select("SELECT name FROM sqlite_master WHERE type='table';")
 
-    def switchToInMemory(self):
-        self.dbConnector.setInMemory()
+    def switch_to_in_memory(self):
+        self.db_connector.set_in_memory()
         self.connection = None

@@ -1,16 +1,16 @@
 class WriteToFile:
     # Here will be the instance stored.
     file = ""
-    filePath = "resource/"
+    file_path = "resource/"
     directory = ""
-    fileName = ""
+    file_name = ""
 
-    def __init__(self,directory,fileName):
+    def __init__(self,directory,file_name):
         self.directory = directory
-        self.fileName = fileName
+        self.file_name = file_name
 
 
-    def writeToFile(self,logItem):
+    def write_to_file(self,log_item):
         if self.file == "":
-            self.file = open(self.filePath + self.directory+ self.fileName,"a")
-        self.file.write(str(logItem) + "\n")
+            self.file = open(self.file_path + self.directory+ self.file_name,"a")
+        self.file.write(str(log_item) + "\n")

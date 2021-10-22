@@ -1,6 +1,6 @@
 ENTITIES_FOLDER = "Entities/"
 USERACTION_FOLDER = "UserActions/"
 ERRORLOG_FOLDER = "ErrorLog/"
-INPUT_LOG = "userInputLog.csv"
-OUTPUT_LOG = "userOutputLog.csv"
+INPUT_LOG = "user_input_log.csv"
+OUTPUT_LOG = "user_output_log.csv"
 ERROR_LOG = "ErrorLog.csv"

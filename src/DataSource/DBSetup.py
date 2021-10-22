@@ -5,76 +5,76 @@ from src.Utilities.ErrorLogging import ErrorLogging
 
 class DBSetup:
 
-    dbExecuteSQL = DBExecuteSQL()
-    errorLogging = ErrorLogging()
+    db_execute_sql = DBExecuteSQL()
+    error_logging = ErrorLogging()
 
-    def generateDropTable(self,tableName):
-        return "DROP TABLE IF EXISTS " + tableName
+    def generate_drop_table(self,table_name):
+        return "DROP TABLE IF EXISTS " + table_name
 
-    def dropTable(self,tableName):
-        sqlDropTable = self.generateDropTable(tableName)
+    def drop_table(self,table_name):
+        sql_drop_table = self.generate_drop_table(table_name)
         try:
-            self.dbExecuteSQL.executeSQLCommand(sqlDropTable)
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
+            self.db_execute_sql.execute_sql_command(sql_drop_table)
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBSetup.create_table","An error occurred:" + sql_exp.args[0])
             raise
 
-    def generateCreateTableStatement(self,tableName, fieldNames):
-        sqlCreateTable =  "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
+    def generate_create_table_statement(self,table_name, field_names):
+        sql_create_table =  "CREATE TABLE IF NOT EXISTS " + table_name + "(\n"
         counter = 0;
-        fieldUnique = False;
-        for columnName in fieldNames:
+        field_unique = False;
+        for column_name in field_names:
             if counter == 0:
-                fieldUnique = True;
+                field_unique = True;
             else:
-                sqlCreateTable += ",";
+                sql_create_table += ",";
 
-            sqlCreateTable += columnName + " TEXT NOT NULL ";
-            if fieldUnique:
-                sqlCreateTable += " UNIQUE ";
+            sql_create_table += column_name + " TEXT NOT NULL ";
+            if field_unique:
+                sql_create_table += " UNIQUE ";
             counter += 1;
-            fieldUnique = False;
+            field_unique = False;
 
-        sqlCreateTable += ");";
-        return sqlCreateTable;
+        sql_create_table += ");";
+        return sql_create_table;
 
-    def createTable(self,tableName, fieldNames):
-        sqlCreateTable = self.generateCreateTableStatement(tableName,fieldNames)
+    def create_table(self,table_name, field_names):
+        sql_create_table = self.generate_create_table_statement(table_name,field_names)
         try:
-            self.dbExecuteSQL.executeSQLCommand(sqlCreateTable)
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBSetup.createTable","An error occurred:" + sqlExp.args[0])
+            self.db_execute_sql.execute_sql_command(sql_create_table)
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBSetup.create_table","An error occurred:" + sql_exp.args[0])
             raise
 
-    def generateInsertStatement(self,tableName, fieldNames):
+    def generate_insert_statement(self,table_name, field_names):
         counter = 0
-        sqlColumns = ""
-        sqlValues = ""
-        sqlUniqueColumn = ""
-        sqlInsert = ""
-        for columnName in fieldNames:
+        sql_columns = ""
+        sql_values = ""
+        sql_unique_column = ""
+        sql_insert = ""
+        for column_name in field_names:
             if counter == 0:
-                sqlUniqueColumn = columnName
+                sql_unique_column = column_name
             else:
-                sqlColumns += ", "
-                sqlValues += ", "
+                sql_columns += ", "
+                sql_values += ", "
 
-            sqlColumns += columnName
-            sqlValues += "?"
+            sql_columns += column_name
+            sql_values += "?"
             counter += 1
 
-        sqlInsert = "INSERT INTO " + tableName + "(" + sqlColumns + ") VALUES(" + sqlValues + ") \n"
-        return sqlInsert
+        sql_insert = "INSERT INTO " + table_name + "(" + sql_columns + ") VALUES(" + sql_values + ") \n"
+        return sql_insert
 
-    def populateEntity(self, sqlCommand, dataRows):
+    def populate_entity(self, sql_command, data_rows):
         try:
-            self.dbExecuteSQL.insertData(sqlCommand, dataRows)
-        except sqlite3.Error as sqlExp:
-            self.errorLogging.writeToLog("DBSetup.populateEntity","An error occurred:" + sqlExp.args[0])
+            self.db_execute_sql.insert_data(sql_command, data_rows)
+        except sqlite3.Error as sql_exp:
+            self.error_logging.write_to_log("DBSetup.populate_entity","An error occurred:" + sql_exp.args[0])
             raise
 
 def main():
-    dbSetup = DBSetup()
+    db_setup = DBSetup()
 
 if __name__ == "__main__":
     main()

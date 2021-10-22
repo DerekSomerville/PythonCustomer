@@ -6,16 +6,16 @@ from src.EntitiesDatabaseMapping.CustomerDatabaseMapping import CustomerDatabase
 
 class TestCustomerDatabaseMapping(unittest.TestCase):
 
-    def test_getCustomerDataFromFile(self):
-        readCSVFile = ReadCSVFile()
-        customerDatabaseMapping = CustomerDatabaseMapping()
-        customerData = customerDatabaseMapping.getCustomerDataFromFile()
-        self.assertEqual( customerData[0] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
+    def test_get_customer_data_from_file(self):
+        read_csv_file = ReadCSVFile()
+        customer_database_mapping = CustomerDatabaseMapping()
+        customer_data = customer_database_mapping.get_customer_data_from_file()
+        self.assertEqual( customer_data[0] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
-    def test_getCustomerDataFromDatabase(self):
-        customerDatabaseMapping = CustomerDatabaseMapping()
-        customerData = customerDatabaseMapping.getCustomerData()
-        self.assertEqual( customerData[0] ,('derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'))
+    def test_get_customer_data_from_database(self):
+        customer_database_mapping = CustomerDatabaseMapping()
+        customer_data = customer_database_mapping.get_customer_data()
+        self.assertEqual( customer_data[0] ,('derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'))
 
 def main():
     unittest.main()

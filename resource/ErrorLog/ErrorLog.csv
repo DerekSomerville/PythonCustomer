@@ -10,3 +10,13 @@ DBExecuteSQL.executeSqlSelect,An error occurred:no such table: customer
 DBExecuteSQL.executeSqlSelect,With command:Select * from customer
 DBExecuteSQL.executeSqlSelect,An error occurred:no such table: customer
 DBExecuteSQL.executeSqlSelect,With command:Select * from customer
+DBExecuteSQL.execute_sql_select,An error occurred:no such table: customer
+DBExecuteSQL.execute_sql_select,With command:Select * from customer
+DBExecuteSQL.execute_sql_select,An error occurred:no such table: customer
+DBExecuteSQL.execute_sql_select,With command:Select * from customer
+DBExecuteSQL.insert_data,An error occurred:no such table: customer
+DBExecuteSQL.execute_sql_select,An error occurred:no such table: customer
+DBExecuteSQL.execute_sql_select,With command:Select * from customer
+DBExecuteSQL.execute_sql_select,An error occurred:no such table: customer
+DBExecuteSQL.execute_sql_select,With command:Select * from customer
+DBExecuteSQL.insert_data,An error occurred:table customer has no column named email_address

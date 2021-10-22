@@ -5,13 +5,13 @@ from src.DataSource.DataSourceConstants import *
 
 class TestOutputConsole(unittest.TestCase):
 
-    outputConsole = OutputConsole()
-    readCSCFile = ReadCSVFile()
+    output_console = OutputConsole()
+    read_csc_file = ReadCSVFile()
 
-    def testPrint(self):
-        self.outputConsole.print("A test of outputConsole.print")
-        outputLine = self.readCSCFile.getLastLines(USERACTION_FOLDER,OUTPUT_LOG,1)
-        self.assertEqual(["A test of outputConsole.print"], outputLine)
+    def test_print(self):
+        self.output_console.print("A test of output_console.print")
+        output_line = self.read_csc_file.get_last_lines(USERACTION_FOLDER,OUTPUT_LOG,1)
+        self.assertEqual(["A test of output_console.print"], output_line)
 
 def main():
     unittest.main()

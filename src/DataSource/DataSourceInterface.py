@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 class DataSourceInterface(ABC):
 
     @abstractmethod
-    def getData(self,tableName,fieldNames):
+    def get_data(self,table_name,field_names):
         pass

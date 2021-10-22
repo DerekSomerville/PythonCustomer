@@ -4,17 +4,17 @@ from src.DataSource.DataSourceConstants import *
 
 class OutputConsole(Output):
 
-    writeToFile = True
-    outputWriteToFile = WriteToFile(USERACTION_FOLDER,OUTPUT_LOG)
+    write_to_file = True
+    output_write_to_file = WriteToFile(USERACTION_FOLDER,OUTPUT_LOG)
 
     def print(self, message):
-        if self.writeToFile:
-            self.outputWriteToFile.writeToFile(message)
+        if self.write_to_file:
+            self.output_write_to_file.write_to_file(message)
         print(message)
 
 def main():
-    outputConsole = OutputConsole()
-    outputConsole.print("Hello World:)")
+    output_console = OutputConsole()
+    output_console.print("Hello World:)")
 
 if __name__ == "__main__":
     main()

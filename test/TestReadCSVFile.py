@@ -6,15 +6,15 @@ from src.DataSource.DataSourceConstants import *
 
 class TestReadCSVFile(unittest.TestCase):
 
-    readCSVFile = ReadCSVFile()
+    read_csv_file = ReadCSVFile()
 
-    def test_getCustomerDataFromFile(self):
-        fileData = self.readCSVFile.getFileData(ENTITIES_FOLDER,"customer" + ".csv")
-        self.assertEqual( fileData[1] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
+    def test_get_customer_data_from_file(self):
+        file_data = self.read_csv_file.get_file_data(ENTITIES_FOLDER,"customer" + ".csv")
+        self.assertEqual( file_data[1] ,['derek.somerville@glasgow.ac.uk', 'Derek', 'Somerville', '1234'])
 
-    def test_getLastLinesFromFile(self):
-        fileLines = self.readCSVFile.getLastLines( ENTITIES_FOLDER, "customer" + ".csv",1)
-        self.assertEqual( fileLines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
+    def test_get_last_lines_from_file(self):
+        file_lines = self.read_csv_file.get_last_lines( ENTITIES_FOLDER, "customer" + ".csv",1)
+        self.assertEqual( file_lines ,['matthew.barr@glasgow.ac.uk', 'Matt', 'Barr', '4321'])
 
 def main():
     unittest.main()

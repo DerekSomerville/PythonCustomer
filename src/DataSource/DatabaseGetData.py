@@ -5,17 +5,17 @@ import sqlite3
 
 class DatabaseGetData(DataSourceInterface):
 
-    dbExecuteSQL = DBExecuteSQL()
+    db_execute_sql = DBExecuteSQL()
 
-    def generateSelectStatement(self,tableName,fieldNames):
-        return "Select * from " + tableName
+    def generate_select_statement(self,table_name,field_names):
+        return "Select * from " + table_name
 
-    def getData(self,tableName,fieldNames):
-        sqlData = []
-        selectStatement = self.generateSelectStatement(tableName,fieldNames)
+    def get_data(self,table_name,field_names):
+        sql_data = []
+        select_statement = self.generate_select_statement(table_name,field_names)
         try:
-            sqlData = self.dbExecuteSQL.executeSqlSelect(selectStatement)
-        except sqlite3.Error as sqlExp:
-            print("getData:An error occurred:", sqlExp.args[0])
+            sql_data = self.db_execute_sql.execute_sql_select(select_statement)
+        except sqlite3.Error as sql_exp:
+            print("get_data:An error occurred:", sql_exp.args[0])
 
-        return sqlData
+        return sql_data

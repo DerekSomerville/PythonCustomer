@@ -2,17 +2,17 @@ from src.EntitiesDatabaseMapping.CustomerDatabaseMapping import CustomerDatabase
 
 class DatabaseSetup:
 
-    customerDatabaseMapping = None
+    customer_database_mapping = None
 
     def __init__(self):
-        self.customerDatabaseMapping = CustomerDatabaseMapping()
+        self.customer_database_mapping = CustomerDatabaseMapping()
 
     def setup(self):
-        self.customerDatabaseMapping.customerDataBaseSetup()
+        self.customer_database_mapping.customer_data_base_setup()
 
 def main():
-    databaseSetup = DataBaseSetup()
-    databaseSetup.setup()
+    database_setup = DataBaseSetup()
+    database_setup.setup()
 
 if __name__ == "__main__":
     main()
